@@ -1,5 +1,10 @@
 #!/bin/bin/env bash
 
+#
+# WARNING:
+# This script is very experimental, use with caution!
+#
+
 #################################################
 #### Ensure we are in the right path. ###########
 #################################################
