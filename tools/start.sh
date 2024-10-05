@@ -18,10 +18,10 @@ source ./common.env
 
 pkill reth
 pkill geth
-sleep 2
+sleep 1
 
 pkill lighthouse
-sleep 2
+sleep 1
 
 # remove the `--gcmode=archive` for a full node
 #
@@ -94,7 +94,7 @@ nohup ${bin_dir}/lighthouse validator_client \
     --metrics --metrics-address='0.0.0.0' --metrics-port=5064 --metrics-allow-origin='*' \
     >>${cl_vc_data_dir}/lighthouse.vc.log 2>&1 &
 
-sleep 2
+sleep 1
 
 tail -n 3 ${el_data_dir}/geth_reth.log
 echo

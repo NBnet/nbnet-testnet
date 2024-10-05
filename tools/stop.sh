@@ -18,10 +18,10 @@ source ./common.env
 
 pkill reth
 pkill geth
-sleep 2
+sleep 1
 
 pkill lighthouse
-sleep 2
+sleep 1
 
 tail -n 3 ${el_data_dir}/reth.log
 echo

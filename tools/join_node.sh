@@ -18,10 +18,10 @@ source ./common.env
 
 pkill reth
 pkill geth
-sleep 2
+sleep 1
 
 pkill lighthouse
-sleep 2
+sleep 1
 
 peer_ip=$NBNET_PEER_IP
 
@@ -72,7 +72,7 @@ nohup ${bin_dir}/lighthouse beacon_node \
     --checkpoint-sync-url="http://${peer_ip}:5052" \
     >>${cl_bn_data_dir}/lighthouse.bn.log 2>&1 &
 
-sleep 2
+sleep 1
 
 tail -n 3 ${el_data_dir}/geth_reth.log
 echo

@@ -20,7 +20,7 @@ pkill lighthouse
 pkill reth
 pkill geth
 
-sleep 2
+sleep 1
 
 mkdir -p $el_data_dir $cl_bn_data_dir $cl_vc_data_dir || exit 1
 cp ../static_files/jwt.hex ${jwt_path} || exit 1
@@ -111,7 +111,7 @@ nohup ${bin_dir}/lighthouse validator_client \
     --metrics --metrics-address='0.0.0.0' --metrics-port=5064 --metrics-allow-origin='*' \
     >>${cl_vc_data_dir}/lighthouse.vc.log 2>&1 &
 
-sleep 2
+sleep 1
 
 tail -n 3 ${el_data_dir}/geth_reth.log
 echo
