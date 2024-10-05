@@ -19,7 +19,8 @@ Check and/or edit the [`cfg_files/custom.env`](cfg_files/custom.env) before the 
 make prepare
 
 # Create genesis data for the new testnet,
-# and create an initial node instance for it.
+# and create an initial node instance for it,
+# `make` is equal to this ops.
 make create_initial_node
 
 # Start the node.

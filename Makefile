@@ -15,15 +15,13 @@ prepare: prepare_bin
 minimal_prepare: prepare_bin
 	cd submodules/egg && make minimal_prepare
 
-restore_initial_validators: minimal_prepare
-	bash -x tools/restore_validator_keys.sh
-	rm -rf testdata/node; mkdir -p testdata/node/cl/vc
-	mv cfg_files/__tmp__vcdata/* testdata/node/cl/vc/
-
-genesis: prepare_code restore_initial_validators
+genesis: minimal_prepare
 	cp cfg_files/custom.env submodules/egg/
 	cd submodules/egg && make build
-	cp -r submodules/egg/data testdata/node/cfg
+	rm -rf testdata/node
+	mkdir -p testdata/node/cl/vc
+	cp -r submodules/egg/data testdata/node/CFG
+	cd testdata/node && cp -r CFG/vcdata/* cl/vc/
 
 create_initial_node: stop_initial_node genesis
 	bash -x tools/init.sh
