@@ -23,7 +23,7 @@ sleep 1
 pkill lighthouse
 sleep 1
 
-tail -n 3 ${el_data_dir}/reth.log
+tail -n 3 ${el_data_dir}/eth1_geth_reth.log
 echo
 tail -n 3 ${cl_bn_data_dir}/lighthouse.bn.log
 echo
