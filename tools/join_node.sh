@@ -42,7 +42,7 @@ nohup ${bin_dir}/geth \
     --datadir=${el_data_dir} \
     --state.scheme='hash' \
     --bootnodes= \
-    --nat=extip:${external_ip} \
+    --nat=extip:${NBNET_EXT_IP} \
     --discovery.port 30303 \
     --http --http.addr='0.0.0.0' --http.port=8545 --http.vhosts='*' --http.corsdomain='*' \
     --http.api='admin,debug,eth,net,txpool,web3,rpc' \
@@ -62,7 +62,7 @@ nohup ${bin_dir}/lighthouse beacon_node \
     --staking \
     --slots-per-restore-point=32 \
     --boot-nodes= \
-    --enr-address=${external_ip} \
+    --enr-address=${NBNET_EXT_IP} \
     --disable-enr-auto-update \
     --disable-upnp \
     --listen-address='0.0.0.0' \
