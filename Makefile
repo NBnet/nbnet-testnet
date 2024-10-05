@@ -41,3 +41,6 @@ archive_node: stop_initial_node
 fmt:
 	find tools -type f | xargs sed -i 's/\t/    /g'
 	find tools -type f | grep -v '\.md' | xargs sed -i 's/ $$//g'
+
+jwt:
+	bash -x tools/update_jwt.sh
