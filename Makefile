@@ -23,7 +23,7 @@ restore_initial_validators: minimal_prepare
 genesis: prepare_code restore_initial_validators
 	cp cfg_files/custom.env submodules/egg/
 	cd submodules/egg && make build
-	cp -r submodules/egg/data testdata/node/genesis_data
+	cp -r submodules/egg/data testdata/node/cfg
 
 create_initial_node: stop_initial_node genesis
 	bash -x tools/init.sh
