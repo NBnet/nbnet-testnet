@@ -6,6 +6,8 @@
 
 ### Generate the initial node
 
+Check and/or edit the [`cfg_files/custom.env`](cfg_files/custom.env) before the following operations.
+
 ```shell
 # Execute on demand when there are code changes,
 # this operation will trigger the `sudo` command.
