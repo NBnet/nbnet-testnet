@@ -20,8 +20,8 @@ genesis: minimal_prepare
 	cd submodules/egg && make build
 	rm -rf testdata/node
 	mkdir -p testdata/node/cl/vc
-	cp -r submodules/egg/data testdata/node/CFG
-	cd testdata/node && cp -r CFG/vcdata/* cl/vc/
+	cp -r submodules/egg/data testdata/node/meta
+	cd testdata/node && cp -r meta/vcdata/* cl/vc/
 
 create_initial_node: stop_initial_node genesis
 	bash -x tools/init.sh
