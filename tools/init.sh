@@ -14,7 +14,8 @@ fi
 EXEC_PATH=$(echo ${EXEC_PATH} | sed 's@/\./@/@g' | sed 's@/\.*$@@')
 cd $EXEC_PATH || exit 1
 #################################################
-source ./common.env
+source utils.sh
+source common.env
 
 pkill lighthouse
 pkill reth
@@ -22,23 +23,23 @@ pkill geth
 
 sleep 1
 
-mkdir -p $el_data_dir $cl_bn_data_dir $cl_vc_data_dir || exit 1
-cp ../static_files/jwt.hex ${jwt_path} || exit 1
+mkdir -p $el_data_dir $cl_bn_data_dir $cl_vc_data_dir || die
+cp ../static_files/jwt.hex ${jwt_path} || die
 
 ${bin_dir}/geth init \
     --datadir=${el_data_dir} \
     --state.scheme='hash' \
     ${genesis_json_path} \
-    >> ${el_data_dir}/eth1_geth_reth.log 2>&1 || exit 1
+    >> ${el_data_dir}/eth1_geth_reth.log 2>&1 || die
 
 # ${bin_dir}/reth init \
 #     --chain=${genesis_json_path} \
 #     --datadir=${el_data_dir} \
 #     --log.file.directory=${el_data_dir}/logs \
-#     >> ${el_data_dir}/eth1_geth_reth.log || exit 1
+#     >> ${el_data_dir}/eth1_geth_reth.log || die
 
 echo '**=============================================================**' \
-    >> ${el_data_dir}/eth1_geth_reth.log || exit 1
+    >> ${el_data_dir}/eth1_geth_reth.log || die
 
 # remove the `--gcmode=archive` for a full node
 #

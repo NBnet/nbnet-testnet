@@ -19,7 +19,21 @@ fi
 EXEC_PATH=$(echo ${EXEC_PATH} | sed 's@/\./@/@g' | sed 's@/\.*$@@')
 cd $EXEC_PATH || exit 1
 #################################################
-source ./common.env
+source utils.sh
+source common.env
+
+PATH=${bin_dir}:$PATH
+
+check_env() {
+    for i in reth geth lighthouse curl; do
+        which $i >/dev/null 2>&1
+        if [[ 0 -ne $? ]]; then
+            die "\n${i} has not been installed properly!\n"
+        fi
+    done
+}
+
+check_env
 
 pkill reth
 pkill geth
@@ -30,14 +44,14 @@ sleep 1
 
 peer_ip=$NBNET_PEER_IP
 
-el_enode=$(curl -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","method":"admin_nodeInfo","params":[],"id":1}' "http://${peer_ip}:8545" | jq '.result.enode' | sed 's/"//g' || exit 1)
-cl_enr=$(curl "http://${peer_ip}:5052/eth/v1/node/identity" | jq '.data.enr' | sed 's/"//g' || exit 1)
-cl_peer_id=$(curl "http://${peer_ip}:5052/eth/v1/node/identity" | jq '.data.peer_id' | sed 's/"//g' || exit 1)
+el_enode=$(curl -X POST -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","method":"admin_nodeInfo","params":[],"id":1}' "http://${peer_ip}:8545" | jq '.result.enode' | sed 's/"//g' || die)
+cl_enr=$(curl "http://${peer_ip}:5052/eth/v1/node/identity" | jq '.data.enr' | sed 's/"//g' || die)
+cl_peer_id=$(curl "http://${peer_ip}:5052/eth/v1/node/identity" | jq '.data.peer_id' | sed 's/"//g' || die)
 
-mkdir -p $el_data_dir $cl_bn_data_dir $cl_vc_data_dir || exit 1
-cp ../static_files/jwt.hex ${jwt_path} || exit 1
+mkdir -p $el_data_dir $cl_bn_data_dir $cl_vc_data_dir || die
+cp ../static_files/jwt.hex ${jwt_path} || die
 
-nohup ${bin_dir}/geth \
+nohup geth \
     --networkid=${chain_id} \
     --datadir=${el_data_dir} \
     --state.scheme='hash' \
@@ -56,7 +70,7 @@ nohup ${bin_dir}/geth \
     --bootnodes=${el_enode} \
     >>${el_data_dir}/eth1_geth_reth.log 2>&1 &
 
-nohup ${bin_dir}/lighthouse beacon_node \
+nohup lighthouse beacon_node \
     --testnet-dir=${testnet_dir} \
     --datadir=${cl_bn_data_dir} \
     --staking \

@@ -36,9 +36,13 @@ archive_node: stop_initial_node
 	sleep 3
 	tar -zcpf initial_node.tar.gz testdata
 
+jwt:
+	bash -x tools/update_jwt.sh
+
 fmt:
 	find tools -type f | xargs sed -i 's/\t/    /g'
 	find tools -type f | grep -v '\.md' | xargs sed -i 's/ $$//g'
 
-jwt:
-	bash -x tools/update_jwt.sh
+update:
+	git pull --prune
+	git submodule update --init --recursive

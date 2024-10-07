@@ -14,5 +14,6 @@ fi
 EXEC_PATH=$(echo ${EXEC_PATH} | sed 's@/\./@/@g' | sed 's@/\.*$@@')
 cd $EXEC_PATH || exit 1
 #################################################
+source utils.sh
 
-openssl rand -hex 32 | tr -d "\n" > ../static_files/jwt.hex
+openssl rand -hex 32 | tr -d "\n" > ../static_files/jwt.hex || die

@@ -19,7 +19,8 @@ fi
 EXEC_PATH=$(echo ${EXEC_PATH} | sed 's@/\./@/@g' | sed 's@/\.*$@@')
 cd $EXEC_PATH || exit 1
 #################################################
-source ./common.env
+source utils.sh
+source common.env
 
 NUMBER_OF_VALIDATORS="64"
 EL_AND_CL_MNEMONIC="giant issue aisle success illegal bike spike question tent bar rely arctic volcano long crawl hungry vocal artwork sniff fantasy very lucky have athlete"
@@ -29,13 +30,13 @@ cfg_path="${cfg_dir}/custom.env"
 vc_dir="${cfg_dir}/__tmp__vcdata"
 
 rm -rf ${vc_dir}
-mkdir ${vc_dir} || exit 1
+mkdir ${vc_dir} || die
 
 validator_cnt=$(grep -Po '(?<=NUMBER_OF_VALIDATORS=")\d+' $cfg_path)
 mnemonics=$(grep -Po '(?<=EL_AND_CL_MNEMONIC=")[\s\w]+(?=")' $cfg_path)
 
 if [[ "" == $validator_cnt || "" == $mnemonics ]]; then
-    exit 1
+    die "$LINENO"
 fi
 
 # --testnet-dir=${testnet_dir} \

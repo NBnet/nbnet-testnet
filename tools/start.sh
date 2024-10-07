@@ -14,7 +14,8 @@ fi
 EXEC_PATH=$(echo ${EXEC_PATH} | sed 's@/\./@/@g' | sed 's@/\.*$@@')
 cd $EXEC_PATH || exit 1
 #################################################
-source ./common.env
+source utils.sh
+source common.env
 
 pkill reth
 pkill geth
