@@ -6,7 +6,7 @@
 	url = https://github.com/nbnet/reth.git
 [submodule "submodules/egg"]
 	path = submodules/egg
-	url = https://github.com/NBnet/EGG.git
+	url = https://github.com/rust-util-collections/EGG.git
 [submodule "submodules/go-ethereum"]
 	path = submodules/go-ethereum
 	url = https://github.com/NBnet/go-ethereum.git
